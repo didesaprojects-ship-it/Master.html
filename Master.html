@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer Tutor Mini App</title>
+    <!-- Include Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --bg-color: var(--tg-theme-bg-color, #ffffff);
+            --text-color: var(--tg-theme-text-color, #222222);
+            --hint-color: var(--tg-theme-hint-color, #707579);
+            --button-color: var(--tg-theme-button-color, #2481cc);
+            --button-text-color: var(--tg-theme-button-text-color, #ffffff);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 16px;
+        }
+        h1 { font-size: 22px; margin-bottom: 4px; }
+        .subtitle { color: var(--hint-color); font-size: 14px; margin-bottom: 20px; }
+        .lesson-card {
+            background: rgba(128, 128, 128, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+        .lesson-card h3 { margin-top: 0; font-size: 18px; }
+        img, video {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        button {
+            background-color: var(--button-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚙️ Virtual Engineering Tutor</h1>
+    <div class="subtitle">Select a module to begin your technical training.</div>
+
+    <div class="lesson-card">
+        <h3>Module 1: Beam Deflection & Stress Analysis</h3>
+        <p>Learn how bending moments affect structural steel beams under point loads.</p>
+        
+        <!-- Instructional Photo / Diagram -->
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600" alt="Engineering Diagram">
+        
+        <!-- Instructional Video Link / Embed -->
+        <video controls poster="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support video.
+        </video>
+
+        <button onclick="completeLesson('Beam Deflection')">Mark Lesson Complete</button>
+    </div>
+
+    <script>
+        // Initialize Telegram Web App
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Expands the Mini App to full screen
+
+        function completeLesson(lessonName) {
+            tg.sendData(JSON.stringify({ status: "completed", lesson: lessonName }));
+            tg.close(); // Closes the mini-app and sends data back to the chat bot
+        }
+    </script>
+</body>
+</html>
